@@ -12,6 +12,10 @@ export default function GalleryTab({ selectedCollection }: GalleryTabProps) {
       ? selectedCollection.collection.sampleImages
       : [selectedCollection.collection.image];
 
+  console.log(selectedCollection.collection.image);
+
+  console.log(imagesToShow);
+
   return (
     <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6">
       <h3 className="text-lg font-bold text-white mb-6">

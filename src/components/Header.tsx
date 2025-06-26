@@ -1,6 +1,9 @@
+"use client";
+
 import { FormEvent } from "react";
 import { FiCopy, FiCheck } from "react-icons/fi";
 import { validateWalletAddress } from "@/lib/validation";
+import StaticHeader from "./StaticHeader";
 
 interface HeaderProps {
   walletInput: string;
@@ -46,19 +49,7 @@ export default function Header({
   return (
     <header className="w-full bg-black/20 backdrop-blur-sm border-b border-white/10">
       <div className="flex flex-col sm:flex-row items-center justify-between px-6 py-3 gap-2">
-        <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">🎨</span>
-          </div>
-          <div>
-            <h1 className="text-lg font-bold text-white">
-              NFT Analytics Dashboard
-            </h1>
-            <p className="text-gray-300 text-xs">
-              Magic Eden Collection Insights
-            </p>
-          </div>
-        </div>
+        <StaticHeader />
 
         <form className="flex items-center space-x-2" onSubmit={handleSubmit}>
           <input
