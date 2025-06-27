@@ -1,4 +1,4 @@
-export interface CollectionData {
+export type CollectionData = {
   id: string;
   name: string;
   image: string;
@@ -40,12 +40,14 @@ export interface CollectionData {
     tokenCount: string;
     onSaleCount: string;
   };
-}
+};
+
+export type Ownership = {
+  tokenCount: string;
+  onSaleCount: string;
+};
 
 export type Collection = {
   collection: CollectionData;
-  ownership: {
-    tokenCount: string;
-    onSaleCount: string;
-  };
+  ownership: Ownership;
 };
