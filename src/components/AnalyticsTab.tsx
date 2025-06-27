@@ -114,7 +114,9 @@ export default function AnalyticsTab() {
             {selectedCollection?.collection.floorSale?.[selectedTimeframe] ?? 0}{" "}
             MON
           </p>
-          <p className="text-orange-300 text-xs">Last {selectedTimeframe}</p>
+          <p className="text-orange-300 text-xs">
+            Last {selectedTimeframe === "7day" ? "7 Days" : "30 Days"}
+          </p>
         </div>
 
         {/* Market Cap */}
@@ -129,7 +131,7 @@ export default function AnalyticsTab() {
               ? selectedCollection.collection.floorAskPrice?.amount?.decimal *
                 parseInt(selectedCollection.ownership.tokenCount)
               : 0}{" "}
-            MONs
+            MON
           </p>
           <p className="text-green-300 text-xs">Est. Total Value</p>
         </div>

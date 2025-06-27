@@ -3,20 +3,23 @@
 import Image from "next/image";
 import { useDashboard } from "@/contexts/DashboardContext";
 
-export default function SideBarContent() {
+interface SideBarContentProps {
+  onClose?: () => void;
+}
+
+export default function SideBarContent({ onClose }: SideBarContentProps) {
   const { collections, selectedCollection, setSelectedCollection } =
     useDashboard();
 
-  const filteredCollections = collections.filter(
-    c => !c.collection.name.includes("0x")
-  );
-
   return (
     <div className="space-y-4">
-      {filteredCollections.map(collection => (
+      {collections.map(collection => (
         <div
           key={collection.collection.id}
-          onClick={() => setSelectedCollection(collection)}
+          onClick={() => {
+            setSelectedCollection(collection);
+            onClose?.();
+          }}
           className={`cursor-pointer p-3 rounded-xl border transition-all flex items-center gap-4 mb-4 shadow-sm hover:shadow-lg ${
             selectedCollection?.collection?.id === collection?.collection?.id
               ? "bg-purple-500/30 border-purple-500/70"

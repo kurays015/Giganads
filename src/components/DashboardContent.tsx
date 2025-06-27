@@ -7,6 +7,8 @@ import ErrorState from "@/components/ErrorState";
 import EmptyState from "@/components/EmptyState";
 import WalletSubmitForm from "@/components/WalletSubmitForm";
 import Sidebar from "@/components/Sidebar";
+import { MobileSideBar } from "@/components/MobileSideBar";
+import WalletAddress from "@/components/WalletAddress";
 
 export default function DashboardContent() {
   const { walletAddress, collections, loading, error } = useDashboard();
@@ -45,8 +47,24 @@ export default function DashboardContent() {
 
   return (
     <div className="flex h-[calc(100vh-60px)] w-full">
+      {/* Mobile Header */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-black/20 backdrop-blur-sm border-b border-white/10 px-4 py-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <MobileSideBar />
+            <h1 className="text-white font-semibold text-lg">NFT Dashboard</h1>
+          </div>
+          <WalletAddress />
+        </div>
+      </div>
+
+      {/* Desktop Sidebar */}
       <Sidebar />
-      <Collections />
+
+      {/* Main Content */}
+      <div className="flex-1 lg:ml-0 pt-16 lg:pt-0">
+        <Collections />
+      </div>
     </div>
   );
 }
