@@ -1,19 +1,13 @@
 import Link from "next/link";
-import { Collection } from "@/types/collection";
+import { useDashboard } from "@/contexts/DashboardContext";
 
-interface OverviewTabProps {
-  selectedCollection: Collection;
-  setShowAlertForm: (show: boolean) => void;
-  selectedCollectionsForComparison: string[];
-  toggleCollectionComparison: (collectionId: string) => void;
-}
+export default function OverviewTab() {
+  const { selectedCollection } = useDashboard();
 
-export default function OverviewTab({
-  selectedCollection,
-  setShowAlertForm,
-  selectedCollectionsForComparison,
-  toggleCollectionComparison,
-}: OverviewTabProps) {
+  if (!selectedCollection) {
+    return null;
+  }
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {/* Key Metrics */}
@@ -55,49 +49,6 @@ export default function OverviewTab({
       <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6">
         <h3 className="text-lg font-bold text-white mb-4">Quick Actions</h3>
         <div className="space-y-3">
-          <button
-            onClick={() => setShowAlertForm(true)}
-            className="w-full bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/50 rounded-lg p-3 text-white font-medium transition-all text-sm flex items-center justify-center gap-2"
-          >
-            <span role="img" aria-label="alert">
-              🔔
-            </span>{" "}
-            Set Price Alert
-          </button>
-          <button
-            onClick={() =>
-              toggleCollectionComparison(selectedCollection.collection.id)
-            }
-            className={`w-full flex items-center justify-center gap-2 ${
-              selectedCollectionsForComparison.includes(
-                selectedCollection.collection.id
-              )
-                ? "bg-blue-500/40 border-blue-500/70"
-                : "bg-blue-500/20 hover:bg-blue-500/30 border-blue-500/50"
-            } border rounded-lg p-3 text-white font-medium transition-all text-sm`}
-          >
-            <span role="img" aria-label="compare">
-              📊
-            </span>{" "}
-            Compare Collection
-            {selectedCollectionsForComparison.includes(
-              selectedCollection.collection.id
-            ) && (
-              <svg
-                className="w-4 h-4 text-blue-300 ml-1"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            )}
-          </button>
           <Link
             href={`https://magiceden.io/collections/monad-testnet/${selectedCollection.collection.id}`}
             referrerPolicy="no-referrer"

@@ -49,12 +49,3 @@ export type Collection = {
     onSaleCount: string;
   };
 };
-
-export interface PriceAlert {
-  id: string;
-  collectionId: string;
-  collectionName: string;
-  targetPrice: number;
-  condition: "above" | "below";
-  isActive: boolean;
-}

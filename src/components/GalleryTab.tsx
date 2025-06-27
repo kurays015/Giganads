@@ -1,20 +1,18 @@
 import Image from "next/image";
-import { Collection } from "@/types/collection";
+import { useDashboard } from "@/contexts/DashboardContext";
 
-interface GalleryTabProps {
-  selectedCollection: Collection;
-}
+export default function GalleryTab() {
+  const { selectedCollection } = useDashboard();
 
-export default function GalleryTab({ selectedCollection }: GalleryTabProps) {
+  if (!selectedCollection) {
+    return null;
+  }
+
   const imagesToShow =
     selectedCollection.collection.sampleImages &&
     selectedCollection.collection.sampleImages.length > 0
       ? selectedCollection.collection.sampleImages
       : [selectedCollection.collection.image];
-
-  console.log(selectedCollection.collection.image);
-
-  console.log(imagesToShow);
 
   return (
     <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6">
@@ -33,7 +31,7 @@ export default function GalleryTab({ selectedCollection }: GalleryTabProps) {
             <Image
               width={320}
               height={320}
-              src={image}
+              src={image ?? "/placeholder-nft.svg"}
               alt={`NFT ${index + 1}`}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               style={{ aspectRatio: "1 / 1" }}

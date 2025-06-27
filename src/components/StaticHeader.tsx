@@ -5,10 +5,8 @@ export default function StaticHeader() {
         <span className="text-white font-bold text-sm">🎨</span>
       </div>
       <div>
-        <h1 className="text-lg font-bold text-white">
-          NFT Analytics Dashboard
-        </h1>
-        <p className="text-gray-300 text-xs">Magic Eden Collection Insights</p>
+        <h1 className="text-lg font-bold text-white">GigaNads</h1>
+        <p className="text-gray-300 text-xs"> NFT Analytics Dashboard</p>
       </div>
     </div>
   );

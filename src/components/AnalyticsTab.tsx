@@ -1,16 +1,13 @@
-import { Collection } from "@/types/collection";
+import { useDashboard } from "@/contexts/DashboardContext";
 
-interface AnalyticsTabProps {
-  selectedCollection: Collection;
-  selectedTimeframe: "7day" | "30day";
-  setSelectedTimeframe: (timeframe: "7day" | "30day") => void;
-}
+export default function AnalyticsTab() {
+  const { selectedCollection, setSelectedTimeframe, selectedTimeframe } =
+    useDashboard();
 
-export default function AnalyticsTab({
-  selectedCollection,
-  selectedTimeframe,
-  setSelectedTimeframe,
-}: AnalyticsTabProps) {
+  if (!selectedCollection) {
+    return null;
+  }
+
   const formatNumber = (num: number) => {
     if (num >= 1000000) {
       return (num / 1000000).toFixed(1) + "M";
@@ -127,12 +124,12 @@ export default function AnalyticsTab({
             <span className="text-green-400 text-xl">💰</span>
           </div>
           <p className="text-xl font-bold text-white mb-2">
-            {selectedCollection.collection.floorAskPrice.amount.decimal &&
+            {selectedCollection.collection.floorAskPrice?.amount?.decimal &&
             selectedCollection.ownership.tokenCount
-              ? selectedCollection.collection.floorAskPrice.amount.decimal *
+              ? selectedCollection.collection.floorAskPrice?.amount?.decimal *
                 parseInt(selectedCollection.ownership.tokenCount)
               : 0}{" "}
-            MON
+            MONs
           </p>
           <p className="text-green-300 text-xs">Est. Total Value</p>
         </div>
