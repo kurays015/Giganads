@@ -8,6 +8,7 @@ async function fetchCollections(
   if (!walletAddress) return [];
   const response = await axios.get(
     `https://api-mainnet.magiceden.dev/v3/rtp/monad-testnet/users/${walletAddress}/collections/v3?includeTopBid=false&includeLiquidCount=false&offset=0&limit=100`
+    // { cache: "force-cache" }
   );
   if (!response.data) throw new Error("Failed to fetch collection data");
 
